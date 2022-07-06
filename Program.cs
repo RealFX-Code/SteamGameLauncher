@@ -10,7 +10,7 @@ namespace GDlauncher2
 {
     public class SteamCheck
     {
-        public string installPath = "n0ll";
+        public string installPath = "null";
         public bool SteamInstalled = false;
 
         public static void Error()
@@ -19,7 +19,7 @@ namespace GDlauncher2
             System.Environment.Exit(-1);
         }
 
-        public static void StartGD()
+        public static void StartGame()
         {
             try
             {
@@ -27,14 +27,13 @@ namespace GDlauncher2
             }
             catch
             {
-                Console.WriteLine("Geometry dash could not be opened!\n");
+                Console.WriteLine("Game could not be opened!\n");
                 SteamCheck.Error();
             }
         }
 
         public static void Check()
         {
-            Object obj = new Object();
             var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
             var key = hklm.OpenSubKey(@"SOFTWARE\WOW6432Node\Valve\Steam");
             var installPath = key.GetValue("InstallPath").ToString();
@@ -42,7 +41,7 @@ namespace GDlauncher2
             hklm.Close();
             if (SteamInstalled)
             {
-                SteamCheck.StartGD();
+                SteamCheck.StartGame();
             }
             else
             {
